@@ -8,3 +8,5 @@ router.post("/register", validInfo, authController.registerUser);
 router.post("/login", validInfo, authController.loginUser);
 router.get("/is-verified", authorization, authController.isVerified);
 router.get("/email", authController.checkEmail);
+
+module.exports = router;
