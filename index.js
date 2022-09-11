@@ -14,3 +14,6 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
   console.log("Hello World!");
 });
+
+app.use("/auth", require("./src/routes/auth"));
+app.use("/feed", require("./src/routes/feed"));
