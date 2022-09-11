@@ -17,3 +17,4 @@ app.get("/", (req, res) => {
 
 app.use("/auth", require("./src/routes/auth"));
 app.use("/feed", require("./src/routes/feed"));
+app.use("/users", require("./src/routes/users"));

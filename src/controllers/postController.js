@@ -10,19 +10,6 @@ class PostController {
       return res.status(500).json("Server error");
     }
   }
-  static async getPostsByUser(req, res) {
-    try {
-      const { id } = req.params;
-      const userPosts = await pool.query(
-        "SELECT * FROM posts WHERE user_id = $1",
-        [id]
-      );
-      return res.status(200).json(userPosts.rows);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json("Server error");
-    }
-  }
   static async createPost(req, res) {
     try {
       const { content } = req.body;
