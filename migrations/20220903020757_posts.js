@@ -6,7 +6,6 @@ exports.up = function (knex) {
   return knex.schema.createTable("posts", function (table) {
     table.increments("id").primary();
     table.integer("user_id").references("id").inTable("users");
-    table.string("title", 50);
     table.string("content", 255).notNullable();
     table.integer("likes");
     table.integer("replies");
