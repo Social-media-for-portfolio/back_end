@@ -10,6 +10,7 @@ exports.up = function (knex) {
     table.string("content", 255).notNullable();
     table.integer("likes");
     table.integer("replies");
+    table.boolean("is_group_post").defaultTo(false);
     table.timestamp("created_at").defaultTo(knex.fn.now());
   });
 };
