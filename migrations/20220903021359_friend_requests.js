@@ -7,6 +7,7 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.integer("sender_id").references("id").inTable("users");
     table.integer("receiver_id").references("id").inTable("users");
+    table.boolean("is_accepted").defaultTo(false);
   });
 };
 
