@@ -34,7 +34,7 @@ class UserController {
       );
 
       const userFriendsAvatars = await pool.query(
-        "SELECT avatar_url FROM friend_requests JOIN users ON sender_id = users.id OR receiver_id = users.id  WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true",
+        "SELECT avatar_url FROM friend_requests JOIN users ON sender_id = users.id OR receiver_id = users.id  WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true ORDER BY friend_requests.id DESC LIMIT 5",
         [id]
       );
 
