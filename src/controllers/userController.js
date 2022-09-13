@@ -27,14 +27,17 @@ class UserController {
   }
   static async getUserProfile(req, res) {
     try {
-      const { id } = req.params;
+      let id;
+      if (req.path === "/me") {
+        id = req.user;
+      } else id = req.params.id;
       const userInfo = await pool.query(
         "SELECT username, first_name, last_name, avatar_url FROM users WHERE id = $1",
         [id]
       );
 
       const userFriendsAvatars = await pool.query(
-        "SELECT avatar_url FROM friend_requests JOIN users ON sender_id = users.id OR receiver_id = users.id  WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true",
+        "SELECT avatar_url FROM friend_requests JOIN users ON sender_id = users.id OR receiver_id = users.id WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true ORDER BY friend_requests.id DESC",
         [id]
       );
 
