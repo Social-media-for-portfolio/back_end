@@ -64,9 +64,10 @@ class AuthController {
       if (!validPassword) {
         return res.status(401).json("password or email is incorrect");
       }
-      const token = jwtGenerator(user.rows[0].id);
+      const id = user.rows[0].id
+      const token = jwtGenerator(id);
 
-      return res.json({ token });
+      return res.json({ token, id });
     } catch (error) {
       console.error(error);
       return res.status(500).send("Server Error");
@@ -74,7 +75,7 @@ class AuthController {
   }
   static async isVerified(req, res) {
     try {
-      return res.json(true);
+      return res.json(req.user);
     } catch (error) {
       console.error(error);
       return res.status(500).send("Server Error");
