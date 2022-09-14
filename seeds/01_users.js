@@ -8,7 +8,6 @@ exports.seed = async function (knex) {
   await knex("users").del();
   await knex("users").insert([
     {
-      id: 1000,
       username: "Emir",
       first_name: "Emir",
       last_name: "Akhmetov",
@@ -17,7 +16,6 @@ exports.seed = async function (knex) {
       avatar_url: avatar,
     },
     {
-      id: 1001,
       username: "Ray",
       first_name: "Ray",
       last_name: "Lu",
@@ -26,7 +24,6 @@ exports.seed = async function (knex) {
       avatar_url: avatar,
     },
     {
-      id: 1002,
       username: "Matt",
       first_name: "Matt",
       last_name: "Tan",
