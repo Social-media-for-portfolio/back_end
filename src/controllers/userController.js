@@ -29,7 +29,7 @@ class UserController {
     try {
       const id = req.params.id;
       const userInfo = await pool.query(
-        "SELECT username, first_name, last_name, avatar_url FROM users WHERE id = $1",
+        "SELECT first_name, last_name, avatar_url FROM users WHERE id = $1",
         [id]
       );
 
