@@ -3,7 +3,7 @@ const pool = require("../config/dbConfig");
 class PostController {
   static async getAllPosts(req, res) {
     try {
-      const allPosts = await pool.query("SELECT avatar_url, first_name, last_name, likes, replies, content, created_at FROM posts JOIN users ON posts.user_id = users.id");
+      const allPosts = await pool.query("SELECT avatar_url, first_name, last_name, likes, replies, content, created_at FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC");
       return res.status(200).json(allPosts.rows);
     } catch (error) {
       console.error(error);
