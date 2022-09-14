@@ -1,0 +1,31 @@
+const pool = require("../config/dbConfig");
+
+class CommentController {
+  static async getComments(req, res) {
+    try {
+      const { postId } = req.params;
+      const comments = await pool.query(
+        "SELECT * FROM comments WHERE post_id = $1",
+        [postId]
+      );
+      return res.status(200).json(comments.rows);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("server error");
+    }
+  }
+  static async postComment(req, res) {
+    try {
+      const { postId } = req.params;
+      const { content } = req.body;
+      const newComment = await pool.query(
+        "INSERT INTO comments (user_id, post_id, content) VALUES($1, $2, $3)",
+        [req.user, postId, content]
+      );
+      res.status(200).json(newComment.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("Server error");
+    }
+  }
+}
