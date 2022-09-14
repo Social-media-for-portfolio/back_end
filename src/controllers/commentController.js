@@ -3,10 +3,10 @@ const pool = require("../config/dbConfig");
 class CommentController {
   static async getComments(req, res) {
     try {
-      const { postId } = req.params;
+      const { id } = req.params;
       const comments = await pool.query(
-        "SELECT * FROM comments WHERE post_id = $1",
-        [postId]
+        "SELECT * FROM comments JOIN users ON user_id = users.id WHERE post_id = $1",
+        [id]
       );
       return res.status(200).json(comments.rows);
     } catch (error) {
@@ -16,7 +16,7 @@ class CommentController {
   }
   static async postComment(req, res) {
     try {
-      const { postId } = req.params;
+      const { id } = req.params;
       const { content } = req.body;
       const newComment = await pool.query(
         "INSERT INTO comments (user_id, post_id, content) VALUES($1, $2, $3)",
@@ -29,3 +29,5 @@ class CommentController {
     }
   }
 }
+
+module.exports = CommentController;
