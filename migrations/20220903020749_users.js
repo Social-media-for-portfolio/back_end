@@ -7,9 +7,8 @@ const avatar = "https://www.w3schools.com/howto/img_avatar.png";
 exports.up = function (knex) {
   return knex.schema.createTable("users", function (table) {
     table.increments("id").primary();
-    table.string("username", 25).notNullable();
-    table.string("first_name", 50);
-    table.string("last_name", 50);
+    table.string("first_name", 50).notNullabe();
+    table.string("last_name", 50).notNullable();
     table.string("location");
     table.string("avatar_url").defaultTo(avatar);
     table.string("password").notNullable();

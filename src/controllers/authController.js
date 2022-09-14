@@ -19,7 +19,7 @@ class AuthController {
   }
   static async registerUser(req, res) {
     try {
-      const { email, password, username } = req.body;
+      const { email, password, first_name, last_name } = req.body;
       const user = await pool.query("SELECT * FROM users WHERE email = $1", [
         email,
       ]);
@@ -33,8 +33,8 @@ class AuthController {
       const bcrytPassword = await bcryt.hash(password, salt);
 
       const newUser = await pool.query(
-        "INSERT INTO users (email, password, username) VALUES ($1, $2, $3) RETURNING *",
-        [email, bcrytPassword, username]
+        "INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *",
+        [email, bcrytPassword, first_name, last_name]
       );
 
       const token = jwtGenerator(newUser.rows[0].id);
