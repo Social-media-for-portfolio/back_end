@@ -7,8 +7,8 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.integer("user_id").references("id").inTable("users");
     table.string("content", 255).notNullable();
-    table.integer("likes");
-    table.integer("replies");
+    table.integer("likes").defaultTo(0);
+    table.integer("replies").defaultTo(0);
     table.boolean("is_group_post").defaultTo(false);
     table.timestamp("created_at").defaultTo(knex.fn.now());
   });
