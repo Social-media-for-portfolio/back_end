@@ -19,8 +19,8 @@ class CommentController {
       const { id } = req.params;
       const { content } = req.body;
       const newComment = await pool.query(
-        "INSERT INTO comments (user_id, post_id, content) VALUES($1, $2, $3)",
-        [req.user, postId, content]
+        "INSERT INTO comments (user_id, post_id, content) VALUES($1, $2, $3) RETURNING user_id, post_id, content",
+        [req.user, id, content]
       );
       res.status(200).json(newComment.rows);
     } catch (error) {
