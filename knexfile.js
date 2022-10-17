@@ -9,7 +9,7 @@ module.exports = {
     connection: {
       database: "social_media",
       user: "postgres",
-      password: "emir",
+      password: "6205",
     },
   },
 

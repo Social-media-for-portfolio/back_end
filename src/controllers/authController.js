@@ -64,10 +64,10 @@ class AuthController {
       if (!validPassword) {
         return res.status(401).json("password or email is incorrect");
       }
-      const id = user.rows[0].id
+      const id = user.rows[0].id;
       const token = jwtGenerator(id);
 
-      return res.json({ token, id });
+      return res.json({ token });
     } catch (error) {
       console.error(error);
       return res.status(500).send("Server Error");
