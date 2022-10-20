@@ -25,7 +25,7 @@ class AuthController {
       ]);
 
       if (user.rows.length !== 0) {
-        return res.status(401).send("user already exists");
+        return res.status(401).json("user already exists");
       }
 
       const saltRounds = 10;
