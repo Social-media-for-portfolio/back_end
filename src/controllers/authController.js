@@ -36,8 +36,8 @@ class AuthController {
         "INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *",
         [email, bcrytPassword, first_name, last_name]
       );
-
-      const token = jwtGenerator(newUser.rows[0].id);
+      const id = newUser.rows[0].id;
+      const token = jwtGenerator(id);
       return res.json({ token, id });
     } catch (error) {
       console.error(error);
