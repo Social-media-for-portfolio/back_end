@@ -75,7 +75,7 @@ class AuthController {
   }
   static async isVerified(req, res) {
     try {
-      return res.json(req.user);
+      return res.json(true);
     } catch (error) {
       console.error(error);
       return res.status(500).send("Server Error");

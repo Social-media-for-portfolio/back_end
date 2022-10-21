@@ -4,7 +4,7 @@ class UserController {
   static async getAllUsers(req, res) {
     try {
       const users = await pool.query(
-        "SELECT username, id, first_name, last_name, avatar_url FROM users"
+        "SELECT id, first_name, last_name, avatar_url FROM users"
       );
       return res.status(200).json(users.rows);
     } catch (error) {
@@ -27,10 +27,9 @@ class UserController {
   }
   static async getUserProfile(req, res) {
     try {
-      const id = req.params.id;
       const userInfo = await pool.query(
-        "SELECT first_name, last_name, avatar_url FROM users WHERE id = $1",
-        [id]
+        "SELECT id, first_name, last_name, avatar_url FROM users WHERE id = $1",
+        [req.user]
       );
 
       return res.status(200).json(userInfo.rows[0]);
