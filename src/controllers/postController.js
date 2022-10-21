@@ -38,6 +38,20 @@ class PostController {
       return res.status(500).json("Server error");
     }
   }
+
+  static async deletePost(req, res) {
+    try {
+      const { id } = req.params;
+      const deletedPost = await pool.query(
+        "DELETE FROM posts WHERE posts.id = $1 RETURNING id, user_id, content",
+        [id],
+      );
+      return res.status(200).json(deletedPost.rows);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("Server error");
+    }
+  }
 }
 
 module.exports = PostController;

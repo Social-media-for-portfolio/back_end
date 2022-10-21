@@ -7,6 +7,7 @@ const authorization = require("../middleware/authorization");
 router.get("/posts", authorization, postController.getAllPosts);
 router.post("/posts", authorization, postController.createPost);
 router.get("/posts/:id", authorization, postController.getPost);
+router.delete("/posts/:id", authorization, postController.deletePost);
 router.get("/posts/:id/comments", authorization, commentController.getComments);
 router.post("/posts/:id", authorization, commentController.postComment);
 
