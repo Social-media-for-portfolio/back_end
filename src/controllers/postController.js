@@ -29,7 +29,7 @@ class PostController {
     try {
       const { content } = req.body;
       const newPost = await pool.query(
-        "INSERT INTO posts (user_id, content) VALUES ($1, $2) RETURNING id, user_id, content",
+        "INSERT INTO posts (user_id, content) VALUES ($1, $2) RETURNING id",
         [req.user, content]
       );
       return res.status(200).json(newPost.rows);
