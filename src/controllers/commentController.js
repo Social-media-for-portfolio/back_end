@@ -28,6 +28,20 @@ class CommentController {
       res.status(500).json("Server error");
     }
   }
+
+  static async deleteComment(req, res) {
+    try {
+      const { commentId } = req.params;
+      const deletedComment = await pool.query(
+        "DELETE FROM comments WHERE comments.id = $1 RETURNING comments.id",
+        [commentId]
+      );
+      res.status(200).json("success");
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("Server error");
+    }
+  }
 }
 
 module.exports = CommentController;
