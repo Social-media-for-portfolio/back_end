@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
+const likeRoutes = require("./src/routes/likes");
 
 //Middleware
 app.use(express.json());
@@ -18,3 +19,4 @@ app.get("/", (req, res) => {
 app.use("/auth", require("./src/routes/auth"));
 app.use("/feed", require("./src/routes/feed"));
 app.use("/users", require("./src/routes/users"));
+app.use(likeRoutes);
