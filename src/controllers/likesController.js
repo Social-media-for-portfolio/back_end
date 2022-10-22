@@ -43,7 +43,7 @@ class LikesController {
   static async getAllLikes(req, res) {
     try {
       const likes = await pool.query(
-        "SELECT post_id, COUNT(*) as likesCount FROM likes GROUP BY post_id"
+        "SELECT post_id, COUNT(*) as likeCount FROM likes GROUP BY post_id"
       );
       return res.status(200).json(likes.rows);
     } catch (error) {
