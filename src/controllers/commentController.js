@@ -5,7 +5,7 @@ class CommentController {
     try {
       const { id } = req.params;
       const comments = await pool.query(
-        "SELECT comments.id, user_id, post_id, content, avatar_url, first_name, last_name, created_at FROM comments JOIN users ON user_id = users.id WHERE post_id = $1",
+        "SELECT comments.id, user_id, post_id, content, avatar_url, first_name, last_name, created_at FROM comments JOIN users ON user_id = users.id WHERE post_id = $1 ORDER BY comments.id DESC",
         [id]
       );
       return res.status(200).json(comments.rows);
