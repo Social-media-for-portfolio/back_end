@@ -6,5 +6,7 @@ const authorization = require("../middleware/authorization");
 router.get("/feed/posts/:id/likes", authorization, likesController.getLikesOfPost);
 router.post("/feed/posts/:id/likes", authorization, likesController.likePost);
 router.delete("/feed/posts/:id/likes", authorization, likesController.deleteLikeFromPost);
+router.get("/feed/posts/likes", authorization, likesController.getAllLikes);
+
 
 module.exports = router;

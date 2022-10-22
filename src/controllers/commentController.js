@@ -42,6 +42,17 @@ class CommentController {
       res.status(500).json("Server error");
     }
   }
+  static async getCommentMetric(req, res) {
+    try {
+      const metrics = await pool.query(
+        "SELECT post_id, COUNT(*) as commentCount FROM comments GROUP BY post_id"
+      );
+      return res.status(200).json(metrics.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("server error");
+    }
+  }
 }
 
 module.exports = CommentController;

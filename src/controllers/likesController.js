@@ -40,6 +40,17 @@ class LikesController {
       res.status(500).json("Server error");
     }
   }
+  static async getAllLikes(req, res) {
+    try {
+      const likes = await pool.query(
+        "SELECT post_id, COUNT(*) as likesCount FROM likes GROUP BY post_id"
+      );
+      return res.status(200).json(likes.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("Server error");
+    }
+  }
 }
 
 module.exports = LikesController;
