@@ -42,9 +42,10 @@ class PostController {
   static async deletePost(req, res) {
     try {
       const { id } = req.params;
+      await pool.query("DELETE FROM comments WHERE post_id = $1", [id]);
       const deletedPost = await pool.query(
         "DELETE FROM posts WHERE posts.id = $1 RETURNING id, user_id, content",
-        [id],
+        [id]
       );
       return res.status(200).json(deletedPost.rows);
     } catch (error) {
