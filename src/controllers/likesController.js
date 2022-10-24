@@ -1,14 +1,15 @@
 const pool = require("../config/dbConfig");
 
 class LikesController {
-  static async getLikesOfPost(req, res) {
+  static async userLikesPost(req, res) {
     try {
       const { id } = req.params;
       const likes = await pool.query(
-        "SELECT COUNT(*) FROM likes WHERE post_id = $1",
-        [id]
+        "SELECT COUNT(*) FROM likes WHERE post_id = $1 AND user_id = $2",
+        [id, req.user]
       );
-      return res.status(200).json(likes.rows[0]);
+      const boolean = parseInt(likes.rows[0].count) ? true : false;
+      return res.status(200).json(boolean);
     } catch (error) {
       console.log(error);
       res.status(500).json("Server error");
