@@ -18,9 +18,10 @@ class LikesController {
   static async likeComment(req, res) {
     try {
       const { id } = req.params;
+      const { postId } = req.body;
       const newLike = await pool.query(
-        "INSERT INTO comment_likes (comment_id,  user_id) VALUES($1, $2) RETURNING *",
-        [id, req.user]
+        "INSERT INTO comment_likes (comment_id,  user_id, post_id) VALUES($1, $2, $3) RETURNING *",
+        [id, req.user, postId]
       );
       return res.status(200).json(newLike.rows[0]);
     } catch (error) {

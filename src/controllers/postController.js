@@ -42,7 +42,9 @@ class PostController {
   static async deletePost(req, res) {
     try {
       const { id } = req.params;
+      await pool.query("DELETE FROM comment_likes WHERE post_id = $1",[id]);
       await pool.query("DELETE FROM comments WHERE post_id = $1", [id]);
+      await pool.query("DELETE FROM likes WHERE post_id = $1", [id])
       const deletedPost = await pool.query(
         "DELETE FROM posts WHERE posts.id = $1 RETURNING id, user_id, content",
         [id]
