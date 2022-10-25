@@ -16,7 +16,7 @@ class UserController {
     try {
       const { id } = req.params;
       const userPosts = await pool.query(
-        "SELECT * FROM posts WHERE user_id = $1",
+        "SELECT user_id, posts.id, avatar_url, first_name, last_name, likes, replies, content, created_at FROM posts JOIN users ON posts.user_id = users.id WHERE user_id = $1 ORDER BY posts.id DESC",
         [id]
       );
       return res.status(200).json(userPosts.rows);
