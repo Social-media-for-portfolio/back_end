@@ -25,7 +25,7 @@ class UserController {
       return res.status(500).json("Server error");
     }
   }
-  static async getUserProfile(req, res) {
+  static async getMyUserProfile(req, res) {
     try {
       const userInfo = await pool.query(
         "SELECT id, first_name, last_name, avatar_url FROM users WHERE id = $1",
@@ -36,6 +36,19 @@ class UserController {
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
+    }
+  }
+  static async getUserProfile(req, res) {
+    try {
+      const {id} = req.params;
+      const userInfo = await pool.query(
+        "SELECT id, first_name, last_name, avatar_url FROM users WHERE id = $1",
+        [id]
+      );
+      return res.status(200).json(userInfo.rows[0]);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("Server error");
     }
   }
   static async addUserAsFriend(req, res) {
