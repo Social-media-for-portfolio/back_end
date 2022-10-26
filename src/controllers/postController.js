@@ -59,7 +59,7 @@ class PostController {
     try {
       const { id } = req.params;
       const posts = await pool.query(
-        "SELECT * FROM comments JOIN posts ON posts.id = comments.post_id WHERE comments.user_id = $1",
+        "SELECT posts.user_id, posts.id, users.avatar_url, users.first_name, users.last_name, posts.likes, posts.replies, posts.content, posts.created_at FROM comments JOIN posts ON posts.id = comments.post_id JOIN users ON users.id = posts.user_id WHERE comments.user_id = $1",
         [id]
       );
       return res.status(200).json(posts.rows);
