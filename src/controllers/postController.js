@@ -42,9 +42,9 @@ class PostController {
   static async deletePost(req, res) {
     try {
       const { id } = req.params;
-      await pool.query("DELETE FROM comment_likes WHERE post_id = $1",[id]);
+      await pool.query("DELETE FROM comment_likes WHERE post_id = $1", [id]);
       await pool.query("DELETE FROM comments WHERE post_id = $1", [id]);
-      await pool.query("DELETE FROM likes WHERE post_id = $1", [id])
+      await pool.query("DELETE FROM likes WHERE post_id = $1", [id]);
       const deletedPost = await pool.query(
         "DELETE FROM posts WHERE posts.id = $1 RETURNING id, user_id, content",
         [id]
@@ -53,6 +53,19 @@ class PostController {
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
+    }
+  }
+  static async GetPostsWithUsersComments(req, res) {
+    try {
+      const { id } = req.params;
+      const posts = await pool.query(
+        "SELECT * FROM comments JOIN posts ON posts.id = comments.post_id WHERE comments.user_id = $1",
+        [id]
+      );
+      return res.status(200).json(posts.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("Server error");
     }
   }
 }
