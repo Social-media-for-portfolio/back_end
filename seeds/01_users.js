@@ -13,7 +13,7 @@ exports.seed = async function (knex) {
       password: "123",
       email: "emir@gmail.com",
       avatar_url:
-      "https://i.imgur.com/mnsUB79.jpeg"
+        "https://media-exp1.licdn.com/dms/image/C4E03AQHIA_qWXmpKaQ/profile-displayphoto-shrink_800_800/0/1661269119965?e=2147483647&v=beta&t=3NQ9GC3bo5EPOUb-OpytSndMu0I6-7b-7uAJ050F6oc",
     },
     {
       first_name: "Ray",
