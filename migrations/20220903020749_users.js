@@ -10,10 +10,11 @@ exports.up = function (knex) {
     table.string("first_name", 50).notNullable();
     table.string("last_name", 50).notNullable();
     table.string("location");
+    table.string("birthday", 60);
+    table.string("bio", 100);
     table.string("avatar_url").defaultTo(avatar);
     table.string("password").notNullable();
     table.string("email", 40).notNullable();
-    table.string("birthday", 60);
   });
 };
 

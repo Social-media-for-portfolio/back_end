@@ -10,6 +10,9 @@ exports.seed = async function (knex) {
     {
       first_name: "Emir",
       last_name: "Akhmetov",
+      bio: "Programmer and hiker",
+      location: "Brooklyn, NY",
+      birthday: "02/10/1997",
       password: "123",
       email: "emir@gmail.com",
       avatar_url:
@@ -19,6 +22,9 @@ exports.seed = async function (knex) {
       first_name: "Ray",
       last_name: "Lu",
       password: "123",
+      bio: "Handball and Jiu-jitsu",
+      location: "Brooklyn, NY",
+      birthday: "03/11/1999",
       email: "ray@gmail.com",
       avatar_url:
         "https://media-exp1.licdn.com/dms/image/C4E03AQEcFcYPvmJKWw/profile-displayphoto-shrink_800_800/0/1637020996535?e=1672272000&v=beta&t=_ZvCb9-bPANycgGwjbYKjCL7X0xmQVLbeDRf-_kSO0w",
@@ -27,6 +33,9 @@ exports.seed = async function (knex) {
       first_name: "Matt",
       last_name: "Tan",
       password: "123",
+      bio: "Programmer and gamer",
+      location: "Brooklyn, NY",
+      birthday: "05/22/1998",
       email: "matt@gmail.com",
       avatar_url:
         "https://media-exp1.licdn.com/dms/image/D4D35AQHAPv3WKZj42w/profile-framedphoto-shrink_800_800/0/1637701691681?e=1667358000&v=beta&t=1EEapWnsmXQ7JoYgcpmy4sqlip8CDDvGBRL3NSDXULs",
