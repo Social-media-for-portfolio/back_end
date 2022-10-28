@@ -10,5 +10,6 @@ router.get("/profile/:id", authorization, userController.getUserProfile);
 router.get("/profile/:id/posts", authorization, userController.getPostsByUser);
 router.get("/profile/:id/comments", authorization, PostController.GetPostsWithUsersComments);
 router.post("/friends/:id", authorization, userController.addUserAsFriend);
+router.put("/profile/:id/info", authorization, userController.updateProfile);
 
 module.exports = router;

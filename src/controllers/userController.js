@@ -64,6 +64,19 @@ class UserController {
       return res.status(500).json("Server error");
     }
   }
+  static async updateProfile(req, res) {
+    try {
+      const { firstName, lastName, location, birthday, bio } = req.body;
+      const updatedProfile = await pool.query(
+        "UPDATE users SET first_name = $1, last_name = $2, location = $3, birthday = $4, bio = $5 WHERE id = $6",
+        [firstName, lastName, location, birthday, bio, req.user]
+      );
+      return res.status(200).json(updatedProfile.rows);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("Server error");
+    }
+  }
 }
 
 module.exports = UserController;
