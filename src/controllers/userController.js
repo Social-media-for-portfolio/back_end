@@ -81,7 +81,7 @@ class UserController {
     try {
       const {id} = req.params;
       const friends = await pool.query(
-        "SELECT users.id, first_name, last_name FROM friend_requests JOIN users ON users.id = sender_id OR users.id = receiver_id WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true",
+        "SELECT users.id, first_name, last_name, avatar_url FROM friend_requests JOIN users ON users.id = sender_id OR users.id = receiver_id WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true",
         [id]
       );
       return res.status(200).json(friends.rows);
