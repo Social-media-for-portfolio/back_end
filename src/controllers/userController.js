@@ -77,6 +77,18 @@ class UserController {
       return res.status(500).json("Server error");
     }
   }
+  static async getFriendsForUser(id) {
+    try {
+      const friends = await pool.query(
+        "SELECT * FROM friend_requests WHERE sender_id = $1 OR receiver_id = $1 AND is_accepted = true",
+        [id]
+      );
+      return res.status(200).json("Server error");
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("Server Error");
+    }
+  }
 }
 
 module.exports = UserController;
