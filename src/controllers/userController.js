@@ -93,11 +93,12 @@ class UserController {
   static async removeUserFromFriends(req, res) {
     try {
       const { id } = req.params;
-      const friend = await pool.query(
-        "UPDATE friend_requests SET is_accepted = false WHERE sender_id = $1 AND receiver_id = $2 OR receiver_id = $1 AND sender_id = $2 RETURNING *",
+      console.log(id);
+      const removedFriend = await pool.query(
+        "DELETE FROM friend_requests WHERE sender_id = $1 AND receiver_id = $2 OR receiver_id = $1 AND sender_id = $2 RETURNING *",
         [req.user, id]
       );
-      return res.status(200).json(friend.rows);
+      return res.status(200).json(removedFriend.rows);
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server Error");
