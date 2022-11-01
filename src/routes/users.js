@@ -9,8 +9,9 @@ router.get("/me", authorization, userController.getMyUserProfile);
 router.get("/profile/:id", authorization, userController.getUserProfile);
 router.get("/profile/:id/posts", authorization, userController.getPostsByUser);
 router.get("/profile/:id/comments", authorization, PostController.GetPostsWithUsersComments);
-router.post("/friends/:id", authorization, userController.addUserAsFriend);
-router.get("/profile/:id/friends", authorization, userController.getFriendsForUser)
+router.get("/profile/:id/friends", authorization, userController.getFriendsForUser);
+router.post("/profile/:id", authorization, userController.addUserAsFriend);
+router.delete("/profile/:id", authorization, userController.removeUserFromFriends);
 router.put("/profile/:id/info", authorization, userController.updateProfile);
 
 module.exports = router;
