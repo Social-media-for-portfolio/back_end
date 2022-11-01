@@ -6,6 +6,8 @@ const authorization = require("../middleware/authorization");
 
 router.get("/", authorization, userController.getAllUsers);
 router.get("/me", authorization, userController.getMyUserProfile);
+router.get("/me/friends/incoming", authorization,  userController.getIncomingRequests);
+router.get("/me/friends/outgoing", authorization, userController.getOutgoingRequests);
 router.get("/profile/:id", authorization, userController.getUserProfile);
 router.get("/profile/:id/posts", authorization, userController.getPostsByUser);
 router.get("/profile/:id/comments", authorization, PostController.GetPostsWithUsersComments);

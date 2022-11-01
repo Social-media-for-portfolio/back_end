@@ -116,6 +116,30 @@ class UserController {
       return res.status(500).json("server error");
     }
   }
+  static async getIncomingRequests(req, res) {
+    try {
+      const incomingRequests = await pool.query(
+        "SELECT users.id, first_name, last_name, avatar_url FROM friend_requests JOIN users ON users.id = sender_id WHERE receiver_id = $1 AND is_accepted = false",
+        [req.user]
+      );
+      return res.status(200).json(incomingRequests.rows);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("server error");
+    }
+  }
+  static async getOutgoingRequests(req, res) {
+    try {
+      const outgoingRequests = await pool.query(
+        "SELECT users.id, first_name, last_name, avatar_url FROM friend_requests JOIN users ON users.id = receiver_id WHERE sender_id = $1 AND is_accepted = false",
+        [req.user]
+      );
+      return res.status(200).json(outgoingRequests.rows);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("server error");
+    }
+  }
 }
 
 module.exports = UserController;
