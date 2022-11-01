@@ -93,14 +93,27 @@ class UserController {
   static async removeUserFromFriends(req, res) {
     try {
       const { id } = req.params;
-      const friends = await pool.query(
+      const friend = await pool.query(
         "UPDATE friend_requests SET is_accepted = false WHERE sender_id = $1 AND receiver_id = $2 OR receiver_id = $1 AND sender_id = $2 RETURNING *",
         [req.user, id]
       );
-      return res.status(200).json(friends.rows);
+      return res.status(200).json(friend.rows);
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server Error");
+    }
+  }
+  static async acceptFriendRequest(req, res) {
+    try {
+      const { id } = req.params;
+      const friend = await pool.query(
+        "UPDATE friend_requests SET is_accepted = true WHERE sender_id = $1 AND receiver_id = $2 OR sender_id = $2 AND receiver_id = $1 RETURNING *",
+        [req.user, id]
+      );
+      return res.status(200).json(friend.rows);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("server error");
     }
   }
 }

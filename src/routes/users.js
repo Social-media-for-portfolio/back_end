@@ -11,6 +11,7 @@ router.get("/profile/:id/posts", authorization, userController.getPostsByUser);
 router.get("/profile/:id/comments", authorization, PostController.GetPostsWithUsersComments);
 router.get("/profile/:id/friends", authorization, userController.getFriendsForUser);
 router.post("/profile/:id", authorization, userController.addUserAsFriend);
+router.put("/profile/:id", authorization, userController.acceptFriendRequest);
 router.delete("/profile/:id", authorization, userController.removeUserFromFriends);
 router.put("/profile/:id/info", authorization, userController.updateProfile);
 
