@@ -55,10 +55,21 @@ class UserController {
     try {
       const { id } = req.params;
       const friend = await pool.query(
-        "INSERT INTO friend_requests (sender_id, receiver_id) VALUES ($1, $2) RETURNING *",
+        "SELECT FROM friend_requests WHERE sender_id = $2 AND receiver_id = $1 ",
         [req.user, id]
       );
-      return res.status(200).json(friend.rows);
+      if (friend.rows.length < 1) {
+        await pool.query(
+          "INSERT INTO friend_requests (sender_id, receiver_id) VALUES ($1, $2)",
+          [req.user, id]
+        );
+      } else {
+        await pool.query(
+          "UPDATE friend_requests SET is_accepted = true WHERE sender_id = $2 AND receiver_id = $1",
+          [req.user, id]
+        );
+      }
+      return res.status(200).json("success");
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
@@ -110,7 +121,10 @@ class UserController {
         "UPDATE friend_requests SET is_accepted = true WHERE sender_id = $1 AND receiver_id = $2",
         [id, req.user]
       );
-      const newFriend = await pool.query("SELECT users.id, first_name, last_name, avatar_url FROM friend_requests JOIN users ON users.id = sender_id WHERE receiver_id = $1 AND sender_id = $2", [req.user, id])
+      const newFriend = await pool.query(
+        "SELECT users.id, first_name, last_name, avatar_url FROM friend_requests JOIN users ON users.id = sender_id WHERE receiver_id = $1 AND sender_id = $2",
+        [req.user, id]
+      );
       return res.status(200).json(newFriend.rows[0]);
     } catch (error) {
       console.error(error);
