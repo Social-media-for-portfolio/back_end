@@ -93,7 +93,6 @@ class UserController {
   static async removeUserFromFriends(req, res) {
     try {
       const { id } = req.params;
-      console.log(id);
       const removedFriend = await pool.query(
         "DELETE FROM friend_requests WHERE sender_id = $1 AND receiver_id = $2 OR receiver_id = $1 AND sender_id = $2 RETURNING *",
         [req.user, id]
@@ -107,11 +106,12 @@ class UserController {
   static async acceptFriendRequest(req, res) {
     try {
       const { id } = req.params;
-      const friend = await pool.query(
-        "UPDATE friend_requests SET is_accepted = true WHERE sender_id = $1 AND receiver_id = $2 OR sender_id = $2 AND receiver_id = $1 RETURNING *",
-        [req.user, id]
+      await pool.query(
+        "UPDATE friend_requests SET is_accepted = true WHERE sender_id = $1 AND receiver_id = $2",
+        [id, req.user]
       );
-      return res.status(200).json(friend.rows);
+      const newFriend = await pool.query("SELECT users.id, first_name, last_name, avatar_url FROM friend_requests JOIN users ON users.id = sender_id WHERE receiver_id = $1 AND sender_id = $2", [req.user, id])
+      return res.status(200).json(newFriend.rows[0]);
     } catch (error) {
       console.error(error);
       return res.status(500).json("server error");
