@@ -8,6 +8,6 @@ exports.seed = async function (knex) {
   await knex("friend_requests").insert([
     { sender_id: "3", receiver_id: "1", is_accepted: true },
     { sender_id: "3", receiver_id: "2", is_accepted: true },
-    { sender_id: "3", receiver_id: "3", is_accepted: true },
+    { sender_id: "1", receiver_id: "2", is_accepted: true },
   ]);
 };
