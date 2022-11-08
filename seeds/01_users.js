@@ -5,7 +5,7 @@
 const avatar = "https://www.w3schools.com/howto/img_avatar.png";
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex("users").del();
+  // await knex("users").del();
   await knex("users").insert([
     {
       first_name: "Emir",
@@ -38,7 +38,7 @@ exports.seed = async function (knex) {
       birthday: "05/22/1998",
       email: "matt@gmail.com",
       avatar_url:
-        "https://media-exp1.licdn.com/dms/image/D4D35AQHAPv3WKZj42w/profile-framedphoto-shrink_800_800/0/1637701691681?e=1667358000&v=beta&t=1EEapWnsmXQ7JoYgcpmy4sqlip8CDDvGBRL3NSDXULs",
+        "https://media-exp1.licdn.com/dms/image/D4D35AQHAPv3WKZj42w/profile-framedphoto-shrink_800_800/0/1637701691681?e=1668492000&v=beta&t=AGYr0Ax5D8O1SeNRKlQMbCNT9OXwLrKdhndIAAciHnY",
     },
   ]);
 };
