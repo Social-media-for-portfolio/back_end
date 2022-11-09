@@ -155,6 +155,16 @@ class UserController {
       return res.status(500).json("server error");
     }
   }
+  static async updateAvatar(req, res) {
+    try {
+      const {avatar} = req.body;
+      const newAvatar = await pool.query("UPDATE users SET avatar_url = $1 WHERE id = $2 RETURNING avatar_url, id", [avatar, req.user]);
+      return res.status(200).json(newAvatar.rows)
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("server error")
+    }
+  }
 }
 
 module.exports = UserController;

@@ -16,5 +16,6 @@ router.post("/profile/:id", authorization, userController.addUserAsFriend);
 router.put("/profile/:id", authorization, userController.acceptFriendRequest);
 router.delete("/profile/:id", authorization, userController.removeUserFromFriends);
 router.put("/profile/:id/info", authorization, userController.updateProfile);
+router.put("/profile/:id/avatar", authorization, userController.updateAvatar);
 
 module.exports = router;
