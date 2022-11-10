@@ -29,11 +29,11 @@ class InterestController {
             return res.status(500).json("server error");
         }
     } 
-    static async removeInterest() {
+    static async removeInterest(req, res) {
         try {
             const {interest} = req.body;
-            const removedInterests = await pool.query("DELETE FROM interests WHERE interest = $1 AND user_id = $2 RETURNING *", [interest, req.user]);
-            return res.status(500).json("Server error");
+            const removedInterest = await pool.query("DELETE FROM interests WHERE interest = $1 AND user_id = $2 RETURNING *", [interest, req.user]);
+            return res.status(200).json(removedInterest.rows);
         } catch (error) {
             console.error(error);
             return res.status(200).json("Server error");
