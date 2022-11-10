@@ -12,7 +12,7 @@ class InterestController {
     } 
     static async getMyIntersts(req, res) {
         try {
-            const myInterests = await pool.query("SELECT * FROM intersts WHERE user_id = $1", [req.user]);
+            const myInterests = await pool.query("SELECT * FROM interests WHERE user_id = $1", [req.user]);
             return res.status(200).json(myInterests.rows);
         } catch (error) {
             console.error(error);
