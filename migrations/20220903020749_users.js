@@ -15,6 +15,7 @@ exports.up = function (knex) {
     table.string("avatar_url").defaultTo(avatar);
     table.string("password").notNullable();
     table.string("email", 40).notNullable();
+    table.boolean("onboarding").defaultTo(false);
   });
 };
 
