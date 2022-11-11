@@ -44,6 +44,15 @@ class InterestController {
             return res.status(200).json("Server error");
         }
     } 
+    static async setOnboarding(req, res) {
+        try {
+            await pool.query("UPDATE users SET onboarding = false WHERE user_id = $1", [req.user]);
+            return res.status(200).json("onboarding completed")
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json("server error");
+        }
+    }
 }
 
 module.exports = InterestController;
