@@ -4,7 +4,7 @@ class PostController {
   static async getAllPosts(req, res) {
     try {
       const allPosts = await pool.query(
-        "SELECT user_id, posts.id,post_tag, tag, avatar_url, first_name, last_name, likes, replies, content, created_at FROM posts JOIN users ON posts.user_id = users.id JOIN post_tags ON posts.id = post_tags.post_id ORDER BY posts.id DESC"
+        "SELECT user_id, posts.id, avatar_url, first_name, last_name, likes, replies, content, created_at FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC"
       );
       return res.status(200).json(allPosts.rows);
     } catch (error) {
@@ -66,6 +66,15 @@ class PostController {
     } catch (error) {
       console.error(error);
       res.status(500).json("Server error");
+    }
+  }
+  static async getAllPostTags(req, res) {
+    try {
+      const postTags = await pool.query("SELECT * FROM post_tags");
+      return res.status(200).json(postTags.rows)
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json("Server error")
     }
   }
 }
