@@ -9,7 +9,7 @@ router.get("/", authorization, userController.getAllUsers);
 router.get("/me", authorization, userController.getMyUserProfile);
 router.get("/interests", authorization, interestController.getInterestsForAllUsers);
 router.get("/me/interests", authorization, interestController.getMyIntersts);
-router.post("/me/interests", authorization, interestController.addInterest);
+router.post("/me/interests", authorization, interestController.addInterests);
 router.delete("/me/interests", authorization, interestController.removeInterest);
 router.get("/me/friends/incoming", authorization,  userController.getIncomingRequests);
 router.get("/me/friends/outgoing", authorization, userController.getOutgoingRequests);

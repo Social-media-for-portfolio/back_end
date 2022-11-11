@@ -19,11 +19,16 @@ class InterestController {
             return res.status(500).json("Server error");
         }
     } 
-    static async addInterest(req, res) {
+    static async addInterests(req, res) {
         try {
-            const {interest} = req.body;
-            const newInterest = await pool.query("INSERT INTO interests (user_id, interest) VALUES ($1, $2) RETURNING *", [req.user, interest]);
-            return res.status(200).json(newInterest.rows);
+            const {interests} = req.body;
+            const insertInterests = async(arr) => {
+                for(let interest of arr) {
+                    await pool.query("INSERT INTO interests (user_id, interest) VALUES ($1, $2)", [req.user, interest])
+                }
+            }
+            insertInterests(interests);
+            return res.status(200).json("success");
         } catch (error) {
             console.error(error);
             return res.status(500).json("server error");
