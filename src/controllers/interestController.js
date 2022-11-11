@@ -46,8 +46,17 @@ class InterestController {
     } 
     static async setOnboarding(req, res) {
         try {
-            await pool.query("UPDATE users SET onboarding = false WHERE user_id = $1", [req.user]);
+            await pool.query("UPDATE users SET onboarding = false WHERE id = $1", [req.user]);
             return res.status(200).json("onboarding completed")
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json("server error");
+        }
+    }
+    static async checkOnboarding(req, res) {
+        try {
+           const status =  await pool.query("SELECT onboarding FROM users WHERE id = $1", [req.user]);
+            return res.status(200).json(status.rows[0])
         } catch (error) {
             console.error(error);
             return res.status(500).json("server error");

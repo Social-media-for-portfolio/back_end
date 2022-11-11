@@ -8,6 +8,7 @@ const authorization = require("../middleware/authorization");
 router.get("/", authorization, userController.getAllUsers);
 router.get("/me", authorization, userController.getMyUserProfile);
 router.put("/me/onboarding", authorization, interestController.setOnboarding);
+router.get("/me/onboarding", authorization, interestController.checkOnboarding);
 router.get("/interests", authorization, interestController.getInterestsForAllUsers);
 router.get("/me/interests", authorization, interestController.getMyIntersts);
 router.post("/me/interests", authorization, interestController.addInterests);
