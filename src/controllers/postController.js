@@ -27,14 +27,17 @@ class PostController {
   }
   static async createPost(req, res) {
     try {
-      const { content, tags} = req.body;
+      const { content, tags } = req.body;
       const newPost = await pool.query(
         "INSERT INTO posts (user_id, content) VALUES ($1, $2) RETURNING id",
         [req.user, content]
       );
-      const {id} = newPost.rows[0]
-      for(let tag of tags) {
-        await pool.query("INSERT INTO post_tags (post_id, tag) VALUES ($1, $2)", [id, tag]);
+      const { id } = newPost.rows[0];
+      for (let tag of tags) {
+        await pool.query(
+          "INSERT INTO post_tags (post_id, tag) VALUES ($1, $2)",
+          [id, tag]
+        );
       }
       return res.status(200).json(newPost.rows);
     } catch (error) {
@@ -76,10 +79,10 @@ class PostController {
   static async getAllPostTags(req, res) {
     try {
       const postTags = await pool.query("SELECT * FROM post_tags");
-      return res.status(200).json(postTags.rows)
+      return res.status(200).json(postTags.rows);
     } catch (error) {
       console.error(error);
-      return res.status(500).json("Server error")
+      return res.status(500).json("Server error");
     }
   }
 }

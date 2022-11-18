@@ -32,7 +32,9 @@ class CommentController {
   static async deleteComment(req, res) {
     try {
       const { commentId } = req.params;
-      await pool.query("DELETE FROM comment_likes WHERE comment_id = $1", [commentId]);
+      await pool.query("DELETE FROM comment_likes WHERE comment_id = $1", [
+        commentId,
+      ]);
       const deletedComment = await pool.query(
         "DELETE FROM comments WHERE comments.id = $1 RETURNING comments.id",
         [commentId]

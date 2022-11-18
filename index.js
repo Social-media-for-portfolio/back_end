@@ -12,10 +12,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-app.get("/", (req, res) => {
-  console.log("Hello World!");
-});
-
 app.use("/auth", require("./src/routes/auth"));
 app.use("/feed", require("./src/routes/feed"));
 app.use("/users", require("./src/routes/users"));
