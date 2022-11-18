@@ -8,7 +8,7 @@ exports.seed = async function (knex) {
   await knex("posts").insert([
     {
       user_id: 1,
-      content: "Hey, my name is Emir! Who wants to go skateboarding?",
+      content: "Who wants to go skateboarding at LES today?",
       likes: 25,
       replies: 10,
     },
@@ -20,7 +20,7 @@ exports.seed = async function (knex) {
     },
     {
       user_id: 3,
-      content: "Hey, my name is Matt! Who wants to play Apex?",
+      content: "Looking for people to play Apex with me tonight.",
       likes: 25,
       replies: 13,
     },

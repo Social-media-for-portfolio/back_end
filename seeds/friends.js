@@ -9,5 +9,10 @@ exports.seed = async function (knex) {
     { sender_id: "3", receiver_id: "1", is_accepted: true },
     { sender_id: "3", receiver_id: "2", is_accepted: true },
     { sender_id: "1", receiver_id: "2", is_accepted: true },
+    { sender_id: "1", receiver_id: "4", is_accepted: true },
+    { sender_id: "1", receiver_id: "5", is_accepted: true },
+    { sender_id: "5", receiver_id: "4", is_accepted: true },
+    { sender_id: "6", receiver_id: "1", is_accepted: true },
+    { sender_id: "6", receiver_id: "3", is_accepted: true },
   ]);
 };

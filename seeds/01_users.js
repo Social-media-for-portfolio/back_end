@@ -10,7 +10,7 @@ exports.seed = async function (knex) {
     {
       first_name: "Emir",
       last_name: "Akhmetov",
-      bio: "Programmer and hiker",
+      bio: "Programming, hiking, astrophysics",
       location: "Brooklyn, NY",
       birthday: "02/10/1997",
       password: "123",
@@ -22,7 +22,7 @@ exports.seed = async function (knex) {
       first_name: "Ray",
       last_name: "Lu",
       password: "123",
-      bio: "Handball and Jiu-jitsu",
+      bio: "Handball, programming and Jiu-jitsu",
       location: "Brooklyn, NY",
       birthday: "03/11/1999",
       email: "ray@gmail.com",
@@ -38,7 +38,40 @@ exports.seed = async function (knex) {
       birthday: "05/22/1998",
       email: "matt@gmail.com",
       avatar_url:
-        "https://media-exp1.licdn.com/dms/image/D4D35AQHAPv3WKZj42w/profile-framedphoto-shrink_800_800/0/1637701691681?e=1668492000&v=beta&t=AGYr0Ax5D8O1SeNRKlQMbCNT9OXwLrKdhndIAAciHnY",
+        "https://ca.slack-edge.com/TKZN62HDF-U02B4FV26G1-2c571b30bd3f-512",
+    },
+    {
+      first_name: "GP",
+      last_name: "J",
+      password: "123",
+      bio: "Software Engineer",
+      location: "Brooklyn, NY",
+      birthday: "03/21/1998",
+      email: "gp@gmail.com",
+      avatar_url:
+        "https://ca.slack-edge.com/TKZN62HDF-U02AS3JAANP-5604ab4b86b7-512",
+    },
+    {
+      first_name: "Zohaib",
+      last_name: "Manzoor",
+      password: "123",
+      bio: "Software engineering, boxing",
+      location: "Brooklyn, NY",
+      birthday: "01/11/1999",
+      email: "zo@gmail.com",
+      avatar_url:
+        "https://ca.slack-edge.com/TKZN62HDF-U02ANS9SECD-046536947bb1-512",
+    },
+    {
+      first_name: "Mark",
+      last_name: "R",
+      password: "123",
+      bio: "Software engineering, gaming",
+      location: "New Jersey",
+      birthday: "04/15/2000",
+      email: "mark@gmail.com",
+      avatar_url:
+        "https://ca.slack-edge.com/TKZN62HDF-U02CE4N9F4Y-a469b5f3c335-512",
     },
   ]);
 };
