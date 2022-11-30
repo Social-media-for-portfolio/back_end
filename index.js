@@ -11,7 +11,9 @@ app.use(cors());
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
+app.get("/", (req, res) => {
+  return res.status(200).json("Welcome to connect")
+})
 app.use("/auth", require("./src/routes/auth"));
 app.use("/feed", require("./src/routes/feed"));
 app.use("/users", require("./src/routes/users"));
