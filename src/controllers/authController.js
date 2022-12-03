@@ -38,7 +38,7 @@ class AuthController {
       );
       const id = newUser.rows[0].id;
       const token = jwtGenerator(id);
-      return res.json({ token });
+      return res.status(201).json({ token });
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
@@ -67,7 +67,7 @@ class AuthController {
       const id = user.rows[0].id;
       const token = jwtGenerator(id);
 
-      return res.json({ token });
+      return res.status(200).json({ token });
     } catch (error) {
       console.error(error);
       return res.status(500).send("Server Error");
@@ -75,7 +75,7 @@ class AuthController {
   }
   static async isVerified(req, res) {
     try {
-      return res.json(true);
+      return res.status(200).json(true);
     } catch (error) {
       console.error(error);
       return res.status(500).send("Server Error");
