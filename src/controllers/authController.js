@@ -10,11 +10,11 @@ class AuthController {
         email,
       ]);
       if (user.rows.length !== 0) {
-        res.status(401).json(false);
-      } else res.status(200).json(true);
+        return res.status(401).json(false);
+      } else  return res.status(200).json(true);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async registerUser(req, res) {

@@ -22,10 +22,10 @@ class CommentController {
         "INSERT INTO comments (user_id, post_id, content) VALUES($1, $2, $3) RETURNING id",
         [req.user, id, content]
       );
-      res.status(200).json(newComment.rows);
+      return res.status(201).json(newComment.rows);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
 
@@ -39,10 +39,10 @@ class CommentController {
         "DELETE FROM comments WHERE comments.id = $1 RETURNING comments.id",
         [commentId]
       );
-      res.status(200).json("success");
+      return res.status(200).json("success");
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async getCommentMetric(req, res) {
@@ -53,7 +53,7 @@ class CommentController {
       return res.status(200).json(metrics.rows);
     } catch (error) {
       console.error(error);
-      res.status(500).json("server error");
+      return res.status(500).json("server error");
     }
   }
 }

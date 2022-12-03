@@ -12,7 +12,7 @@ class LikesController {
       return res.status(200).json(boolean);
     } catch (error) {
       console.log(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async likeComment(req, res) {
@@ -23,10 +23,10 @@ class LikesController {
         "INSERT INTO comment_likes (comment_id,  user_id, post_id) VALUES($1, $2, $3) RETURNING *",
         [id, req.user, postId]
       );
-      return res.status(200).json(newLike.rows[0]);
+      return res.status(201).json(newLike.rows[0]);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async deleteLikeFromComment(req, res) {
@@ -39,7 +39,7 @@ class LikesController {
       return res.status(200).json(deletedLike.rows[0]);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async getAllCommentLikes(req, res) {
@@ -50,7 +50,7 @@ class LikesController {
       return res.status(200).json(likes.rows);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
 }

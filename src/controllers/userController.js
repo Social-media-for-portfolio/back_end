@@ -9,7 +9,7 @@ class UserController {
       return res.status(200).json(users.rows);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async getPostsByUser(req, res) {
@@ -48,7 +48,7 @@ class UserController {
       return res.status(200).json(userInfo.rows[0]);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async addUserAsFriend(req, res) {

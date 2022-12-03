@@ -34,7 +34,7 @@ class InterestController {
         }
       };
       insertInterests(interests);
-      return res.status(200).json("success");
+      return res.status(201).json("success");
     } catch (error) {
       console.error(error);
       return res.status(500).json("server error");
@@ -50,7 +50,7 @@ class InterestController {
       return res.status(200).json(removedInterest.rows);
     } catch (error) {
       console.error(error);
-      return res.status(200).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async setOnboarding(req, res) {

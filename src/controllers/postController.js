@@ -39,7 +39,7 @@ class PostController {
           [id, tag]
         );
       }
-      return res.status(200).json(newPost.rows);
+      return res.status(201).json(newPost.rows);
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
@@ -73,7 +73,7 @@ class PostController {
       return res.status(200).json(posts.rows);
     } catch (error) {
       console.error(error);
-      res.status(500).json("Server error");
+      return res.status(500).json("Server error");
     }
   }
   static async getAllPostTags(req, res) {
