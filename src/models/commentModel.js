@@ -30,6 +30,7 @@ class CommentModel {
       "SELECT post_id, COUNT(*) as commentCount FROM comments GROUP BY post_id"
     );
     return metrics.rows;
+    
   }
 }
 
