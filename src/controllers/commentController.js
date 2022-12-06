@@ -1,14 +1,12 @@
 const pool = require("../config/dbConfig");
+const CommentModel = require("../models/commentModel")
 
 class CommentController {
   static async getComments(req, res) {
     try {
       const { id } = req.params;
-      const comments = await pool.query(
-        "SELECT comments.id, user_id, post_id, content, avatar_url, first_name, last_name, created_at FROM comments JOIN users ON user_id = users.id WHERE post_id = $1 ORDER BY comments.id DESC",
-        [id]
-      );
-      return res.status(200).json(comments.rows);
+      const comments = await CommentModel.getAllComents(id);
+      return res.status(200).json(comments);
     } catch (error) {
       console.error(error);
       return res.status(500).json("server error");
@@ -18,11 +16,8 @@ class CommentController {
     try {
       const { id } = req.params;
       const { content } = req.body;
-      const newComment = await pool.query(
-        "INSERT INTO comments (user_id, post_id, content) VALUES($1, $2, $3) RETURNING id",
-        [req.user, id, content]
-      );
-      return res.status(201).json(newComment.rows);
+      const newComment = await CommentModel.postNewComment(req.user, id, content);
+      return res.status(201).json(newComment);
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
