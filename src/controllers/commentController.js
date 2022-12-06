@@ -27,14 +27,8 @@ class CommentController {
   static async deleteComment(req, res) {
     try {
       const { commentId } = req.params;
-      await pool.query("DELETE FROM comment_likes WHERE comment_id = $1", [
-        commentId,
-      ]);
-      const deletedComment = await pool.query(
-        "DELETE FROM comments WHERE comments.id = $1 RETURNING comments.id",
-        [commentId]
-      );
-      return res.status(200).json("success");
+      const deletedComment = await CommentModel.deleteComment(commentId);
+      return res.status(200).json(deletedComment);
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server error");
@@ -42,10 +36,8 @@ class CommentController {
   }
   static async getCommentMetric(req, res) {
     try {
-      const metrics = await pool.query(
-        "SELECT post_id, COUNT(*) as commentCount FROM comments GROUP BY post_id"
-      );
-      return res.status(200).json(metrics.rows);
+      const metrics = await CommentModel.getCommentCount();
+      return res.status(200).json(metrics);
     } catch (error) {
       console.error(error);
       return res.status(500).json("server error");
